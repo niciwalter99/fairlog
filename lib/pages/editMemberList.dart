@@ -8,6 +8,8 @@ class EditMemberList extends StatefulWidget {
 
 class _EditMemberListState extends State<EditMemberList> {
 
+  Map data = {};
+
   final controller = TextEditingController();
 
   var members = {0: 'hllp', 1:'t'};
@@ -21,16 +23,13 @@ class _EditMemberListState extends State<EditMemberList> {
   bool isInitialised = false;
 
   @override
-  void initState() {
-    super.initState();
-  }
-  @override
   Widget build(BuildContext context) {
 
+    data = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Team A'),
+        title: Text(data['team']),
         centerTitle: true,
         backgroundColor: Colors.redAccent,
       ),
@@ -113,26 +112,6 @@ class _EditMemberListState extends State<EditMemberList> {
     Iterable<int>.generate(list.length).forEach((index)
     => {map[index] = list[index]});
     print(map);
-  }
-  Widget quoteTemplate(member) {
-    return Card(
-        margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text(
-                member,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey[800],
-                ),
-              ),
-            ],
-          ),
-        )
-    );
   }
 
 }

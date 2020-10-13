@@ -6,6 +6,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
+//Navigator.pushNamed(context, '/location');
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
