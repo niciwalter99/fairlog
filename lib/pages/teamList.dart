@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fairlog/pages/editMemberList.dart';
+import 'package:fairlog/db/databaseHelper.dart';
 
 
 class TeamList extends StatefulWidget {
@@ -9,6 +11,11 @@ class TeamList extends StatefulWidget {
 class _TeamListState extends State<TeamList> {
 
   List<String> teamNames = ['Team A', 'Team B', 'Team C'];
+
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +34,14 @@ class _TeamListState extends State<TeamList> {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
                       child: FlatButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/editmem', arguments: {
-                            'team': teamNames[index],
-                          });
+                        onPressed: () async {
+                          print(await DataBaseHelper.instance.queryAll());
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => EditMemberList(team: teamNames[index],)),
+                          );
+                          print(await DataBaseHelper.instance.queryAll());
+                          print(result);
                         },
                         child: Text(teamNames[index]),
                         color: Colors.orange[200],
@@ -59,4 +70,5 @@ class _TeamListState extends State<TeamList> {
       ),
     );
   }
+
 }
