@@ -99,47 +99,48 @@ class _TeamListState extends State<TeamList> {
               child: ListView.builder(
                   itemCount: teamNames.length,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
-                      child: FlatButton(
-                        onPressed: () async {
-                          print(await DataBaseHelper.instance.queryAll());
-                          final result = await Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => EditMemberList(team: teamNames[index],)),
-                          );
-                          print(await DataBaseHelper.instance.queryAll());
-                          print(result);
-                        },
-                        child: ListTile(
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () {
-                                  print(teamNames[index]);
-                                  change(context, teamNames[index]);
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.delete),
-                                //TODO Altert Dialog mit Are you sure you want to delete
-                                onPressed: () {
-                                  teamNames.remove(teamNames[index]);
-                                  //TODO delete Data from Table
-                                },)
+                    return Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
+                        child: FlatButton(
+                          onPressed: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => EditMemberList(team: teamNames[index],)),
+                            );
+                            print(result);
+                          },
+                          child: ListTile(
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () {
+                                    print(teamNames[index]);
+                                    change(context, teamNames[index]);
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  //TODO Altert Dialog mit Are you sure you want to delete
+                                  onPressed: () {
+                                    teamNames.remove(teamNames[index]);
+                                    //TODO delete Data from Table
+                                  },)
 
-                            ],
+                              ],
+                            ),
+                            title: Text(teamNames[index]),
                           ),
-                          title: Text(teamNames[index]),
+                          color: Colors.orange[200],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                            //side: BorderSide(color: Colors.white),
+                          ),
+                          minWidth: 330,
                         ),
-                        color: Colors.orange[200],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          //side: BorderSide(color: Colors.white),
-                        ),
-                        minWidth: 200,
                       ),
                     );
                   }),

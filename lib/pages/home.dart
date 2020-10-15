@@ -30,7 +30,9 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(height: 60),
                 FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/chooseProtocolant');
+                  },
                   child: Text("Choose Protocolant"),
                   color: Colors.orangeAccent,
                   shape: RoundedRectangleBorder(
