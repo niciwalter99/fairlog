@@ -49,6 +49,7 @@ class _ChooseProtocolantState extends State<ChooseProtocolant> {
                       padding: const EdgeInsets.fromLTRB(0,30,0,0),
                       child: FlatButton(
                         onPressed: () async {
+                          Navigator.pushNamed(context, '/presentList', arguments: {'team': teams[index]});
                           //final result = await Navigator.push(
                             //context,
                             //MaterialPageRoute(builder: (context) => EditMemberList(team: teamNames[index],)),

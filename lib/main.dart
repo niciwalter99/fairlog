@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fairlog/pages/home.dart';
 import 'package:fairlog/pages/editMemberList.dart';
 import 'package:fairlog/pages/chooseProtocolant.dart';
+import 'package:fairlog/pages/presentList.dart';
 
 void main() {
   runApp(
@@ -14,6 +15,7 @@ void main() {
         '/teamlist': (context) => TeamList(),
         '/editmem': (context) => EditMemberList(),
         '/chooseProtocolant': (context) => ChooseProtocolant(),
+        '/presentList': (context) => PresentList(),
       }
 
   ));
