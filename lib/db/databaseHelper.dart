@@ -10,6 +10,10 @@ class DataBaseHelper {
   static final _dbVersion = 1;
   static final _tableName = 'fairlogMember';
 
+  /*static final _teamTableName = 'teams';
+  static final _teamdbName = 'fairlogteams.db';
+  static final columnTeamName = 'team';*/
+
   static final columnId = '_id';
   static final columnName = 'name';
   static final columnTeam = 'team';
@@ -92,5 +96,21 @@ class DataBaseHelper {
   Future delete (int id) async {
     Database db = await instance.database;
     return await db.delete(_tableName, where: '$columnId = ?', whereArgs: [id]);
+  }
+
+  Future<List<String>> changeTeamNames(String originTeam, String newTeam) async {
+
+    Database db = await instance.database;
+    List<Map<String, dynamic>> test = await (db.query(
+        _tableName, where: '$columnTeam=?',
+        whereArgs: [originTeam]));
+    for(int i = 0; i < test.length; i++) {
+
+      await update({
+        DataBaseHelper.columnId:test[i][columnId] ,
+        DataBaseHelper.columnTeam: newTeam
+      });
+    }
+
   }
 }

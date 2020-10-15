@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 
 class Home extends StatefulWidget {
+
+  //TODO loadscreen for Picture
   @override
   _HomeState createState() => _HomeState();
 }
@@ -12,68 +14,64 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget> [
-            Row(
-              children: <Widget> [
-              ],
-            ),
-            Container(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(height: 70),
+                Image.asset('assets/FairLog.jpg',
+                  scale: 1,),
+                Row(
+                  children: <Widget>[
+                  ],
+                ),
+                SizedBox(height: 60),
+                FlatButton(
+                  onPressed: () {},
+                  child: Text("Choose Protocolant"),
+                  color: Colors.orangeAccent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                    //side: BorderSide(color: Colors.white),
+                  ),
+                  minWidth: 250,
+                  height: 50,
+                ),
+                SizedBox(height: 30),
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/teamlist');
+                  },
+                  child: Text("Edit Team List",
+                  ),
+                  color: Colors.orange[300],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                    //side: BorderSide(color: Colors.white),
+                  ),
+                  minWidth: 250,
+                  height: 50,
+                ),
+                SizedBox(height: 30),
+                FlatButton(
+                  onPressed: () {},
+                  child: Text("Overview"),
+                  color: Colors.orange[200],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                    //side: BorderSide(color: Colors.white),
+                  ),
+                  minWidth: 250,
+                  height: 50,
+                ),
 
-              child: Padding(
-                  padding: EdgeInsets.all(0),
-                child: Text(
-                  '',
-
-                   style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                     letterSpacing: 0,
-                     color: Colors.grey[100],
-                     backgroundColor: Colors.orange[400],
-                  )
-            ),
-              )
-            ),
-            SizedBox(height: 220),
-            FlatButton(
-              onPressed: () {},
-              child: Text("Choose Protocolant"),
-              color: Colors.orangeAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-                //side: BorderSide(color: Colors.white),
-              ),
-              minWidth: 200,
-            ),
-            SizedBox(height: 30),
-            FlatButton(
-              onPressed: () {},
-              child: Text("Edit Team List",
-              ),
-              color: Colors.orange[300],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-                //side: BorderSide(color: Colors.white),
-              ),
-              minWidth: 200,
-            ),
-            SizedBox(height: 30),
-            FlatButton(
-              onPressed: () {},
-              child: Text("Overview"),
-              color: Colors.orange[200],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-                //side: BorderSide(color: Colors.white),
-              ),
-              minWidth: 200,
-            ),
-
-          ]
-        )
+              ]
+          );
+        }
+      )
     );
   }
 }

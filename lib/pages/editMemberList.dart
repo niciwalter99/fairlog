@@ -20,13 +20,7 @@ class _EditMemberListState extends State<EditMemberList> {
     this.team = team;
   }
 
-  final controller = TextEditingController();
-
   List<Map<String,dynamic>> members = [];
-
-
-  Map<int, TextEditingController> _controllers = {};
-
 
   @override
   void initState() {
@@ -35,7 +29,7 @@ class _EditMemberListState extends State<EditMemberList> {
   }
 
   void updateDataBase() async {
-    members = await DataBaseHelper.instance.queryAll();
+    members = await DataBaseHelper.instance.getTeamMember(team);
     setState(() {
     });
   }
@@ -88,11 +82,7 @@ class _EditMemberListState extends State<EditMemberList> {
     }
 
    // data = ModalRoute.of(context).settings.arguments;
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.pop(context, members);
-        return false;},
-      child: Scaffold(
+      return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
           title: Text(team),
@@ -104,14 +94,7 @@ class _EditMemberListState extends State<EditMemberList> {
             Expanded(
               child: ListView.builder (
               itemCount: members.length,
-                itemBuilder: (context, index) {/*
-                  key = members.keys.elementAt(index);
-                  _controllers[index] = new TextEditingController(
-                    text: members[key],);
-                } else {
-                  key = index;
-                  _controllers[index] = new TextEditingController();
-                }*/
+                itemBuilder: (context, index) {
                   return Card(
                     color: Colors.white,
                     child: Padding(
@@ -126,7 +109,12 @@ class _EditMemberListState extends State<EditMemberList> {
                             },
                             ),
                             IconButton(
-                                icon: Icon(Icons.delete),)
+                                icon: Icon(Icons.delete),
+                            //TODO Altert Dialog mit Are you sure you want to delete
+                            onPressed: () {
+                                  DataBaseHelper.instance.delete(members[index][DataBaseHelper.columnId]);
+                                  updateDataBase();
+                            },)
 
                             ],
                         ),
@@ -140,7 +128,7 @@ class _EditMemberListState extends State<EditMemberList> {
             ),
 
 
-            Padding(
+            /*Padding(
               padding: EdgeInsets.all(20),
               child: CircleAvatar(
                 radius: 30,
@@ -158,10 +146,23 @@ class _EditMemberListState extends State<EditMemberList> {
                     ),
                 ),
               ),
-            )
+            )*/
         ],
         ),
-      ),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: FloatingActionButton(
+            elevation: 0,
+            onPressed: () {
+
+              createData(context);
+            },
+            child: Icon(Icons.add),
+            backgroundColor: Colors.orange,
+
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

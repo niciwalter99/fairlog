@@ -8,7 +8,8 @@ void main() {
       MaterialApp(
       initialRoute: '/home',
       routes: {
-        '/home': (context) => TeamList(),
+        '/home': (context) => Home(),
+        '/teamlist': (context) => TeamList(),
         '/editmem': (context) => EditMemberList(),
       }
 
