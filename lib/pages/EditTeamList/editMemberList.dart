@@ -87,7 +87,6 @@ class _EditMemberListState extends State<EditMemberList> {
         appBar: AppBar(
           title: Text(team),
           centerTitle: true,
-          backgroundColor: Colors.redAccent,
         ),
         body: Column(
           children: [

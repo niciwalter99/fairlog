@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fairlog/utility/Data.dart';
+import 'file:///D:/IISL/apps/fairlog/lib/pages/ChooseProtocolant/presentList.dart';
 
 class ChooseProtocolant extends StatefulWidget {
   @override
@@ -35,7 +36,6 @@ class _ChooseProtocolantState extends State<ChooseProtocolant> {
       appBar: AppBar(
         title: Text('Choose your Team'),
         centerTitle: true,
-        backgroundColor: Colors.redAccent,
       ),
       body: Column(
         children: [
@@ -49,7 +49,10 @@ class _ChooseProtocolantState extends State<ChooseProtocolant> {
                       padding: const EdgeInsets.fromLTRB(0,30,0,0),
                       child: FlatButton(
                         onPressed: () async {
-                          Navigator.pushNamed(context, '/presentList', arguments: {'team': teams[index]});
+                          await Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PresentList(teams[index])));
+                          //Navigator.pushNamed(context, '/presentList', arguments: {'team': teams[index]});
                           //final result = await Navigator.push(
                             //context,
                             //MaterialPageRoute(builder: (context) => EditMemberList(team: teamNames[index],)),

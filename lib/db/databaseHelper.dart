@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'dart:math';
 
 class DataBaseHelper {
 
@@ -66,6 +67,51 @@ class DataBaseHelper {
     return await db.query(_tableName);
   }
 
+  Future<int> getWrittenProtocolOfName(int iD) async{
+    Database db = await instance.database;
+    List<Map<String, dynamic>> test = await (db.query(_tableName, where: '$columnId = ?', whereArgs: [iD]));
+    return int.parse(test[0][columnWrittenProtocol]);
+  }
+
+  Future<List<Map<String,dynamic>>> getTeamMember(String team) async{
+    Database db = await instance.database;
+    return await (db.query(_tableName, where: '$columnTeam = ?', whereArgs: [team]));
+  }
+
+  Future<List<int>> getPossibleCandidates(List<int> iDs, String team) async{
+    List<Map<String, dynamic>> member = await getTeamMember(team);
+    List<Map<String,dynamic>> candidates = [];
+    List<int> endCandidates = [];
+
+    List<int> writtenProtocols = [];
+
+    print('member:$member');
+
+
+    for(int i = 0; i < member.length; i++) {
+      if(iDs.contains(member[i][columnId])) {
+        candidates.add(member[i]);
+        print(candidates);              /*if(int.parse(member[i][columnWrittenProtocol]) > 0) {
+              candidates.add(member[i][columnId]);
+            }*/
+      }
+    }
+
+    for(int i = 0; i < candidates.length; i++) {
+      writtenProtocols.add(int.parse(candidates[i][columnWrittenProtocol]));
+    }
+
+    int minProtocols = writtenProtocols.reduce(min);
+
+    for(int i = 0; i < candidates.length; i++) {
+      if (int.parse(candidates[i][columnWrittenProtocol]) == minProtocols) {
+        endCandidates.add(candidates[i][columnId]);
+      }
+    }
+
+      return endCandidates;
+  }
+
   Future<bool> iDExists (int iD) async {
     Database db = await instance.database;
    // db.execute('DELETE FROM $_tableName');
@@ -73,10 +119,6 @@ class DataBaseHelper {
     return test.isNotEmpty;
   }
 
-  Future<List<Map<String,dynamic>>> getTeamMember(String team) async{
-    Database db = await instance.database;
-    return await (db.query(_tableName, where: '$columnTeam = ?', whereArgs: [team]));
-  }
 
   Future<String> getName (int iD) async {
     Database db = await instance.database;
@@ -90,7 +132,6 @@ class DataBaseHelper {
     Database db = await instance.database;
     int id = row[columnId];
     return await db.update(_tableName, row, where: '$columnId = ?', whereArgs: [id]); /* $columnName = ?*/
-
   }
 
   Future delete (int id) async {

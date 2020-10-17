@@ -1,4 +1,6 @@
+import 'file:///D:/IISL/apps/fairlog/lib/pages/ChooseProtocolant/chooseProtocolant.dart';
 import 'package:flutter/material.dart';
+import 'file:///D:/IISL/apps/fairlog/lib/pages/EditTeamList/teamList.dart';
 
 
 class Home extends StatefulWidget {
@@ -30,8 +32,10 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(height: 60),
                 FlatButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/chooseProtocolant');
+                  onPressed: () async{
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChooseProtocolant()));
                   },
                   child: Text("Choose Protocolant"),
                   color: Colors.orangeAccent,
@@ -44,8 +48,10 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(height: 30),
                 FlatButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/teamlist');
+                  onPressed: () async {
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TeamList()));
                   },
                   child: Text("Edit Team List",
                   ),

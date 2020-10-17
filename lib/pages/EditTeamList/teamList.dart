@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:fairlog/pages/editMemberList.dart';
+import 'file:///D:/IISL/apps/fairlog/lib/pages/EditTeamList/editMemberList.dart';
 import 'package:fairlog/db/databaseHelper.dart';
 import 'package:fairlog/utility/Data.dart';
 import 'dart:convert';
@@ -91,7 +91,6 @@ class _TeamListState extends State<TeamList> {
       appBar: AppBar(
         title: Text('Choose your Team'),
         centerTitle: true,
-        backgroundColor: Colors.redAccent,
       ),
       body: Column(
           children: [
