@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fairlog/db/databaseHelper.dart';
+import 'package:confetti/confetti.dart';
+
+
 class YourProtocolant extends StatefulWidget {
 
   List<int> iDs;
@@ -14,6 +17,8 @@ class YourProtocolant extends StatefulWidget {
   @override
   _YourProtocolantState createState() => _YourProtocolantState(iDs,team);
 }
+
+//TODO effect glitzer
 
 class _YourProtocolantState extends State<YourProtocolant> {
 
@@ -41,8 +46,9 @@ class _YourProtocolantState extends State<YourProtocolant> {
 
   @override
   Widget build(BuildContext context) {
-    print(iDs);
+
     return Scaffold(
+      backgroundColor: Colors.orange[50],
       appBar: AppBar(
         title: Text('Your Protocolant'),
       ),
@@ -57,11 +63,21 @@ class _YourProtocolantState extends State<YourProtocolant> {
               color: Colors.black26,
             ),),
            SizedBox(height: 30),
-           Text(protocolant,
-           style: TextStyle(
-             fontSize: 70,
-             color: Colors.black87,
-           ),),
+        FlatButton(
+          onPressed: () { /*Firework*/},
+          child: Text(protocolant,
+          style: TextStyle(
+            fontSize: 40,
+          ),),
+          color: Colors.orange[200],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+            //side: BorderSide(color: Colors.white),
+          ),
+          minWidth: 220,
+          height: 70,
+        ),
+
             SizedBox(height: 80),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +89,7 @@ class _YourProtocolantState extends State<YourProtocolant> {
                       getTeamMember();
                     },
                     child: Text('choose another member'),
-                  color: Colors.red[600],
+                  color: Colors.red[300],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
 
@@ -97,7 +113,7 @@ class _YourProtocolantState extends State<YourProtocolant> {
                     },
                     child: Text('Submit'), //TODO SnackBar in Beginning with Submitted
                     //TODO Protocol List with Date/ Present List
-                    color: Colors.green,
+                    color: Colors.green[300],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18),
                       //side: BorderSide(color: Colors.white),

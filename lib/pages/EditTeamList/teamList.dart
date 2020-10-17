@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'file:///D:/IISL/apps/fairlog/lib/pages/EditTeamList/editMemberList.dart';
+import 'package:fairlog/pages/EditTeamList/editMemberList.dart';
 import 'package:fairlog/db/databaseHelper.dart';
 import 'package:fairlog/utility/Data.dart';
 import 'dart:convert';
@@ -45,9 +45,16 @@ class _TeamListState extends State<TeamList> {
     TextEditingController c = TextEditingController();
     return showDialog(context: context, builder: (context) {
       return AlertDialog(
+        backgroundColor: Colors.orange[50],
           title: Text('Team Name'),
           content: TextField(
-            controller: c,
+          decoration: InputDecoration(
+
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.orange[200]),
+            ),
+          ),
+      controller: c,
           ),
           actions: <Widget> [
             MaterialButton(onPressed: () async {
@@ -69,6 +76,12 @@ class _TeamListState extends State<TeamList> {
           title: Text('Team Name'),
           content: TextField(
             controller: c,
+            decoration: InputDecoration(
+
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.orange[200]),
+              ),
+            ),
           ),
           actions: <Widget> [
             MaterialButton(onPressed: () async {
@@ -87,7 +100,7 @@ class _TeamListState extends State<TeamList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.orange[50],
       appBar: AppBar(
         title: Text('Choose your Team'),
         centerTitle: true,
@@ -156,7 +169,7 @@ class _TeamListState extends State<TeamList> {
             createTeam(context);
           },
           child: Icon(Icons.add),
-          backgroundColor: Colors.orange,
+          backgroundColor: Colors.orange[400],
 
         ),
       ),

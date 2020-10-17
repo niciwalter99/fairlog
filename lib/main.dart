@@ -1,20 +1,15 @@
-import 'file:///D:/IISL/apps/fairlog/lib/pages/ChooseProtocolant/chooseProtocolant.dart';
-import 'file:///D:/IISL/apps/fairlog/lib/pages/EditTeamList/teamList.dart';
-import 'file:///D:/IISL/apps/fairlog/lib/pages/ChooseProtocolant/yourprotocolant.dart';
 import 'package:flutter/material.dart';
 import 'package:fairlog/pages/home.dart';
-import 'file:///D:/IISL/apps/fairlog/lib/pages/EditTeamList/editMemberList.dart';
-import 'file:///D:/IISL/apps/fairlog/lib/pages/ChooseProtocolant/chooseProtocolant.dart';
-import 'file:///D:/IISL/apps/fairlog/lib/pages/ChooseProtocolant/presentList.dart';
+import 'package:fairlog/pages/Overview/Overview.dart';
 
 void main() {
   runApp(
       MaterialApp(
         theme: ThemeData(
-          primaryColor: Colors.orange,
-          accentColor: Colors.green,
-          textTheme: TextTheme(bodyText2: TextStyle(color: Colors.grey)),
-          hoverColor: Colors.orange[500],
+          primaryColor: Colors.orange[400],
+          //accentColor: Colors.green,
+          //textTheme: TextTheme(bodyText2: TextStyle(color: Colors.grey)),
+          //hoverColor: Colors.orange[500], //TODO hovercolor
         ),
       home: Home(),
       /*initialRoute: '/home',

@@ -64,6 +64,7 @@ class _EditMemberListState extends State<EditMemberList> {
       TextEditingController c = TextEditingController();
       return showDialog(context: context, builder: (context) {
         return AlertDialog(
+          backgroundColor: Colors.orange[50],
             title: Text('Change Name'),
             content: TextField(
               controller: c,
@@ -83,7 +84,7 @@ class _EditMemberListState extends State<EditMemberList> {
 
    // data = ModalRoute.of(context).settings.arguments;
       return Scaffold(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.orange[50],
         appBar: AppBar(
           title: Text(team),
           centerTitle: true,
@@ -157,7 +158,7 @@ class _EditMemberListState extends State<EditMemberList> {
               createData(context);
             },
             child: Icon(Icons.add),
-            backgroundColor: Colors.orange,
+            backgroundColor: Colors.orange[400],
 
           ),
         ),

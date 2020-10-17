@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fairlog/utility/Data.dart';
-import 'file:///D:/IISL/apps/fairlog/lib/pages/ChooseProtocolant/presentList.dart';
+import 'package:fairlog/pages/ChooseProtocolant/presentList.dart';
 
 class ChooseProtocolant extends StatefulWidget {
   @override
@@ -32,7 +32,7 @@ class _ChooseProtocolantState extends State<ChooseProtocolant> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.orange[50],
       appBar: AppBar(
         title: Text('Choose your Team'),
         centerTitle: true,
@@ -59,7 +59,7 @@ class _ChooseProtocolantState extends State<ChooseProtocolant> {
                           //);
                         },
                         child: Text(teams[index]),
-                        color: Colors.orange[getColor(index)],
+                        color: Colors.orange[200],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18),
                           //side: BorderSide(color: Colors.white),
@@ -79,6 +79,7 @@ class _ChooseProtocolantState extends State<ChooseProtocolant> {
   }
   
   int getColor(int index) {
+    return 300;
     int num = 400 - index * 100;
     if(num > 0) return num;
     

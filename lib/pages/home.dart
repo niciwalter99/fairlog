@@ -1,6 +1,6 @@
-import 'file:///D:/IISL/apps/fairlog/lib/pages/ChooseProtocolant/chooseProtocolant.dart';
+import 'package:fairlog/pages/ChooseProtocolant/chooseProtocolant.dart';
 import 'package:flutter/material.dart';
-import 'file:///D:/IISL/apps/fairlog/lib/pages/EditTeamList/teamList.dart';
+import 'package:fairlog/pages/EditTeamList/teamList.dart';
 
 
 class Home extends StatefulWidget {
@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.orange[50],
       body: LayoutBuilder(
         builder: (context, constraints) {
           return Column(

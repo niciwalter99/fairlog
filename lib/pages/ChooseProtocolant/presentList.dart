@@ -1,4 +1,4 @@
-import 'file:///D:/IISL/apps/fairlog/lib/pages/ChooseProtocolant/yourprotocolant.dart';
+import 'package:fairlog/pages/ChooseProtocolant/yourprotocolant.dart';
 import 'package:flutter/material.dart';
 import 'package:fairlog/db/databaseHelper.dart';
 class PresentList extends StatefulWidget {
@@ -63,7 +63,7 @@ class _PresentListState extends State<PresentList> {
   List<Map<String,dynamic>> teamMember = [];
 
   Color grey = Colors.grey;
-  Color orange = Colors.orange;
+  Color orange = Colors.orange[300];
   
 
   Color buttonColor;
@@ -87,7 +87,7 @@ class _PresentListState extends State<PresentList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.orange[50],
       appBar: AppBar(
         title: Text('Present List'),
         centerTitle: true,
@@ -114,7 +114,7 @@ class _PresentListState extends State<PresentList> {
                      });
                    },
                       child: Text(upperBottonText[buttonIndex]),
-                     color: Colors.orange,
+                     color: Colors.orange[300],
                      shape: RoundedRectangleBorder(
                        borderRadius: BorderRadius.circular(8),
                        //side: BorderSide(color: Colors.white),
@@ -132,8 +132,8 @@ class _PresentListState extends State<PresentList> {
                       return Card(
                         color: Colors.grey[50],
                         child: CheckboxListTile(
-                          checkColor: Colors.orange,
-                          activeColor: Colors.orange,
+                          checkColor: Colors.white,
+                          activeColor: Colors.orange[300],
                           secondary: IconButton(
                             onPressed: () {
                               volunteer(context, teamMember[index][DataBaseHelper.columnName], teamMember[index][DataBaseHelper.columnId]);
@@ -159,7 +159,8 @@ class _PresentListState extends State<PresentList> {
               ),
                 ),
               ),
-              RaisedButton(
+              FlatButton(
+                minWidth: 400,
                 onPressed: () async{
                 if(buttonColor == grey) {
                   final snackBar = SnackBar(
