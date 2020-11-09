@@ -16,7 +16,7 @@ class Data {
 
   Future get _localFile async {
     final path = await _localPath;
-    return File('$path/yourfile.txt');
+    return File('$path/teamList5.txt');
   }
 
   Future writeCounter(List<String> teams) async {
@@ -34,7 +34,6 @@ class Data {
 
       // Read the file
       String contents = await file.readAsString();
-
       return contents;
     } catch (e) {
       // If we encounter an error, return 0

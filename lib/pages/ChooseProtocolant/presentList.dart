@@ -28,8 +28,8 @@ class _PresentListState extends State<PresentList> {
         ),
         children: <TextSpan>[
         new TextSpan(text: 'Do you really want to choose '),
-        new TextSpan(text: 'Nici ', style: new TextStyle(fontWeight: FontWeight.bold)),
-          new TextSpan(text: 'as volunteer?'),
+        new TextSpan(text: name, style: new TextStyle(fontWeight: FontWeight.bold)),
+          new TextSpan(text: ' as volunteer?'),
         ],
       ),
           ),
@@ -86,6 +86,35 @@ class _PresentListState extends State<PresentList> {
 
   @override
   Widget build(BuildContext context) {
+    if(teamMember.length == 0) {
+      return Scaffold(
+          backgroundColor: Colors.orange[50],
+          appBar: AppBar(
+            title: Text('Present List'),
+            centerTitle: true,
+          ),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('You don\'t have any team member yet',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.black26,
+                      letterSpacing: 2,
+                    ),),
+                  Row(
+                    children: [Text('')],
+                  ),
+                ],
+              ),
+            ),
+          )
+      );
+    }
     return Scaffold(
       backgroundColor: Colors.orange[50],
       appBar: AppBar(
@@ -128,7 +157,6 @@ class _PresentListState extends State<PresentList> {
                   child: ListView.builder(
                   itemCount: teamMember.length,
                     itemBuilder: (context, index) {
-                    //TODO if no TeamMember, BUTOON FOR SIGNING TEAMs
                       return Card(
                         color: Colors.grey[50],
                         child: CheckboxListTile(
@@ -160,7 +188,7 @@ class _PresentListState extends State<PresentList> {
                 ),
               ),
               FlatButton(
-                minWidth: 400,
+                minWidth: 350,
                 onPressed: () async{
                 if(buttonColor == grey) {
                   final snackBar = SnackBar(
@@ -188,7 +216,7 @@ class _PresentListState extends State<PresentList> {
                   //side: BorderSide(color: Colors.white),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
             ]
           ),
       ),

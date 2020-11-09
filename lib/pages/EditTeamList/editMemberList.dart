@@ -34,14 +34,11 @@ class _EditMemberListState extends State<EditMemberList> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
+  changeData(BuildContext context, int iD) async{
 
-    changeData(BuildContext context, int iD) async{
-
-      TextEditingController c = TextEditingController(text: await DataBaseHelper.instance.getName(iD));
-      return showDialog(context: context, builder: (context) {
-        return AlertDialog(
+    TextEditingController c = TextEditingController(text: await DataBaseHelper.instance.getName(iD));
+    return showDialog(context: context, builder: (context) {
+      return AlertDialog(
           title: Text('Change Name'),
           content: TextField(
             controller: c,
@@ -49,39 +46,100 @@ class _EditMemberListState extends State<EditMemberList> {
           actions: <Widget> [
             MaterialButton(onPressed: () async {
               await DataBaseHelper.instance.update({DataBaseHelper.columnId: iD,
-                  DataBaseHelper.columnName: c.text.toString()});
-                  Navigator.of(context).pop(c.text.toString());
-                  updateDataBase();
+                DataBaseHelper.columnName: c.text.toString()});
+              Navigator.of(context).pop(c.text.toString());
+              updateDataBase();
             },
-            child: Text('Submit'))
+                child: Text('Submit'))
           ]
-        );
-      });
-    }
+      );
+    });
+  }
 
-    createData(BuildContext context) {
+  createData(BuildContext context) {
 
-      TextEditingController c = TextEditingController();
-      return showDialog(context: context, builder: (context) {
-        return AlertDialog(
+    TextEditingController c = TextEditingController();
+    return showDialog(context: context, builder: (context) {
+      return AlertDialog(
           backgroundColor: Colors.orange[50],
-            title: Text('Change Name'),
-            content: TextField(
-              controller: c,
-            ),
-            actions: <Widget> [
-              MaterialButton(onPressed: () async{
-                await DataBaseHelper.instance.insert({DataBaseHelper.columnTeam: team,
-                    DataBaseHelper.columnWrittenProtocol: '0', DataBaseHelper.columnName: c.text.toString()});
-                    Navigator.of(context).pop(c.text.toString());
-                    updateDataBase();
-              },
-                  child: Text('Submit'))
-            ]
-        );
-      });
-    }
+          title: Text('Change Name'),
+          content: TextField(
+            controller: c,
+          ),
+          actions: <Widget> [
+            MaterialButton(onPressed: () async{
+              await DataBaseHelper.instance.insert({DataBaseHelper.columnTeam: team,
+                DataBaseHelper.columnWrittenProtocol: '0', DataBaseHelper.columnName: c.text.toString()});
+              Navigator.of(context).pop(c.text.toString());
+              updateDataBase();
+            },
+                child: Text('Submit'))
+          ]
+      );
+    });
+  }
 
+  sureToDelete(BuildContext context, int index) {
+
+    return showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        backgroundColor: Colors.orange[50],
+        title: Text('Are you sure you want to delete this member? You will also delete all written protocols.'),
+        actions: <Widget> [
+          Row(
+            children: [ FlatButton(onPressed: () async {
+              await DataBaseHelper.instance.delete(members[index][DataBaseHelper.columnId]);
+              updateDataBase();
+
+              Navigator.pop(context);
+            },
+                child: Text('Yes')),
+              FlatButton(onPressed: () {
+                Navigator.pop(context);
+              },
+                  child: Text('No'))
+            ],
+          ),
+        ],
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    if(team.length == 0) {
+      print('noTeams');
+      print(team.length);
+      return Scaffold(
+          backgroundColor: Colors.orange[50],
+          appBar: AppBar(
+            title: Text('Choose your Team'),
+            centerTitle: true,
+          ),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('You don\'t have any team member yet',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.black26,
+                      letterSpacing: 2,
+                    ),),
+                  Row(
+                    children: [Text('')],
+                  ),
+                ],
+              ),
+            ),
+          )
+      );
+    }
    // data = ModalRoute.of(context).settings.arguments;
       return Scaffold(
         backgroundColor: Colors.orange[50],
@@ -110,10 +168,8 @@ class _EditMemberListState extends State<EditMemberList> {
                             ),
                             IconButton(
                                 icon: Icon(Icons.delete),
-                            //TODO Altert Dialog mit Are you sure you want to delete
                             onPressed: () {
-                                  DataBaseHelper.instance.delete(members[index][DataBaseHelper.columnId]);
-                                  updateDataBase();
+                                sureToDelete(context, index);
                             },)
 
                             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fairlog/pages/home.dart';
 import 'package:fairlog/pages/Overview/Overview.dart';
+import 'package:fairlog/member/teamMember.dart';
 
 void main() {
   runApp(
@@ -11,7 +12,7 @@ void main() {
           //textTheme: TextTheme(bodyText2: TextStyle(color: Colors.grey)),
           //hoverColor: Colors.orange[500], //TODO hovercolor
         ),
-      home: Home(),
+      home: Home(),//ConfettiSample(),
       /*initialRoute: '/home',
       routes: {
         '/home': (context) => Home(),

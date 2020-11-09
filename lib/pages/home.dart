@@ -1,4 +1,5 @@
 import 'package:fairlog/pages/ChooseProtocolant/chooseProtocolant.dart';
+import 'package:fairlog/pages/Overview/Overview.dart';
 import 'package:flutter/material.dart';
 import 'package:fairlog/pages/EditTeamList/teamList.dart';
 
@@ -24,8 +25,8 @@ class _HomeState extends State<Home> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SizedBox(height: 70),
-                Image.asset('assets/FairLog.jpg',
-                  scale: 1,),
+                Image.asset('assets/Page1.png',
+                  scale: 6,),
                 Row(
                   children: <Widget>[
                   ],
@@ -65,7 +66,11 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(height: 30),
                 FlatButton(
-                  onPressed: () {},
+                  onPressed: () async{
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Overview()));
+                  },
                   child: Text("Overview"),
                   color: Colors.orange[200],
                   shape: RoundedRectangleBorder(

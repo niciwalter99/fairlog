@@ -25,12 +25,17 @@ class _TeamListState extends State<TeamList> {
   void updateData() async {
 
 
-      String out = await Data.instance.readCounter();  //read Data from local storage
-      teamNames = out.split('\,');
-      print(teamNames);
-      setState(() {
+      String out = await Data.instance.readCounter();
+      if(out != '0') {
+        if(out != '') {
+        teamNames = out.split('\,');
+          print(teamNames);
+          print(teamNames.length);
+          setState(() {
 
-      });
+          });
+        }
+      } //TODO No Team yet
   }
 
   void changeData() async{
@@ -97,8 +102,82 @@ class _TeamListState extends State<TeamList> {
     });
   }
 
+  sureToDelete(BuildContext context, int index) {
+
+    return showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        backgroundColor: Colors.orange[50],
+        title: Text('Are you sure you want to delete this team? You will also delete all members and all written protocols.'),
+        actions: <Widget> [
+          Row(
+            children: [ FlatButton(onPressed: () async {
+              DataBaseHelper.instance.deleteTeam(teamNames[index]);
+              teamNames.remove(teamNames[index]);
+              changeData();
+              setState(() {
+
+              });
+
+              Navigator.pop(context);
+            },
+                child: Text('Yes')),
+              FlatButton(onPressed: () {
+                Navigator.pop(context);
+              },
+                  child: Text('No'))
+            ],
+          ),
+        ],
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if(teamNames.length == 0) {
+      print('noTeams');
+      print(teamNames.length);
+      return Scaffold(
+          backgroundColor: Colors.orange[50],
+          appBar: AppBar(
+            title: Text('Choose your Team'),
+            centerTitle: true,
+          ),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('You don\'t have any team member yet',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.black26,
+                      letterSpacing: 2,
+                    ),),
+                  Row(
+                    children: [Text('')],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: FloatingActionButton(
+            elevation: 0,
+            onPressed: (){
+              createTeam(context);
+            },
+            child: Icon(Icons.add),
+            backgroundColor: Colors.orange[400],
+
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      );
+    }
     return Scaffold(
       backgroundColor: Colors.orange[50],
       appBar: AppBar(
@@ -136,10 +215,8 @@ class _TeamListState extends State<TeamList> {
                                 ),
                                 IconButton(
                                   icon: Icon(Icons.delete),
-                                  //TODO Altert Dialog mit Are you sure you want to delete
                                   onPressed: () {
-                                    teamNames.remove(teamNames[index]);
-                                    //TODO delete Data from Table
+                                    sureToDelete(context, index);
                                   },)
 
                               ],

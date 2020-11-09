@@ -85,13 +85,14 @@ class DataBaseHelper {
 
     List<int> writtenProtocols = [];
 
-    print('member:$member');
+    //Database db = await instance.database;
+    //db.execute('DELETE FROM $_tableName');
 
 
     for(int i = 0; i < member.length; i++) {
       if(iDs.contains(member[i][columnId])) {
         candidates.add(member[i]);
-        print(candidates);              /*if(int.parse(member[i][columnWrittenProtocol]) > 0) {
+        /*if(int.parse(member[i][columnWrittenProtocol]) > 0) {
               candidates.add(member[i][columnId]);
             }*/
       }
@@ -132,6 +133,11 @@ class DataBaseHelper {
     Database db = await instance.database;
     int id = row[columnId];
     return await db.update(_tableName, row, where: '$columnId = ?', whereArgs: [id]); /* $columnName = ?*/
+  }
+
+  Future deleteTeam(String team) async{
+    Database db = await instance.database;
+    return await db.delete(_tableName, where: '$columnTeam = ?', whereArgs: [team]);
   }
 
   Future delete (int id) async {
