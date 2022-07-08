@@ -1,0 +1,26 @@
+ title: Text(
+
+                          onChanged: (text) async{
+                            print(await DataBaseHelper.instance.getID(team, text));
+
+
+                            if(members.containsKey(key)) {
+                              DataBaseHelper.instance.update({DataBaseHelper.columnId: index,
+                                DataBaseHelper.columnName: text});
+                            } else {
+                              await DataBaseHelper.instance.insert(
+                                  {DataBaseHelper.columnName: text,
+                                    DataBaseHelper.columnTeam: team,
+                                    DataBaseHelper.columnWrittenProtocol: '1'});
+                                    members[await DataBaseHelper.instance.getID(team, text)] = text;
+                              print(members);
+                            }
+
+                            //members[index] = text;
+                            print(members);
+                          },
+                          controller: _controllers[index],
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                        ),
+                        ),
